@@ -68,7 +68,7 @@
                       </div><!-- /.slider-blue -->
                       <p>accelLimit</p>
                       <div class="slider-blue">
-                        <input type="text" value="" class="submit-form slider form-control" 
+                        <input type="text" id="advanceSteer" value="" class="submit-form slider form-control" 
                              data-slider-min="-1" data-slider-max="1"
                              data-slider-step="0.1" data-slider-value="{{ kegman['advanceSteer'] }}" data-slider-orientation="horizontal"
                              data-slider-selection="before" data-slider-tooltip="show">
@@ -120,17 +120,19 @@
       $("document").ready(function(){
           //$('.submit-form').on('keyup', function(){
           $("#kegman-form input").change(function(){
+              d = {
+                  angleFactor: $('#angleFactor').val(),
+                  advanceSteer: $('#advanceSteer').val(),
+              };
+              console.log(d);
               $.ajax({
                   url: "/api/kegman",
                   type: "POST",
                   dataType: "json",
                   contentType: "application/json",
-                  //data: $('form').serialize()
-                  data: {
-                      angleFactor: $('#angleFactor').val(),
-                  },
+                  data: JSON.stringify(d),
               }).done(function(data) {
-                  console.log(data);
+                  //console.log(data);
               });
           });
       });

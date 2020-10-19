@@ -9,6 +9,7 @@ from flask_login import login_required, current_user
 from app import login_manager
 from jinja2 import TemplateNotFound
 from .kegman import kegman
+import json
 
 @blueprint.route('/index')
 @login_required
@@ -37,7 +38,12 @@ def route_template(template):
 @login_required
 def kegman_data():
     d = request.form.to_dict()
-    print(d)
+    json = request.get_json()
+    print(json)
+    for k, v in json.items():
+        print(f"{k} = {v}")
+    #data = json.dumps(request.data.decode('utf-8'))
+
     #try:
     #    for item in kegman.conf:
     #        if item in config and str(config[item]) != str(kegman.conf[item]) and float(config[item]) != float(kegman.conf[item]) and not item in ['identifier', 'time']:
