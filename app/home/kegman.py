@@ -21,7 +21,6 @@ try:
   car_params = car.CarParams.from_bytes(params.get('CarParams', True))
   kegman = kegman_conf(car_params)
   kegman_valid = ('tuneRev' in kegman.conf)
-  print(kegman.conf)
 except:
   print("kegman error")
   kegman_valid = False

@@ -4,7 +4,7 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 from app.home import blueprint
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, request
 from flask_login import login_required, current_user
 from app import login_manager
 from jinja2 import TemplateNotFound
@@ -36,5 +36,20 @@ def route_template(template):
 @blueprint.route('/api/kegman', methods=['POST', 'GET'])
 @login_required
 def kegman_data():
-    print("kegman data")
+    d = request.form.to_dict()
+    print(d)
+    #try:
+    #    for item in kegman.conf:
+    #        if item in config and str(config[item]) != str(kegman.conf[item]) and float(config[item]) != float(kegman.conf[item]) and not item in ['identifier', 'time']:
+    #            print(item, config[item], kegman.conf[item])
+    #            kegman.conf[item] = str(config[item])
+    #            itemChanged = True
+    #        else:
+    #            config[item] = kegman.conf[item]
+    #    if itemChanged:
+    #        kegman.element_updated = True
+    #        kegman.write_config(kegman.conf)
+    #        #tunePush.send_json(kegman.conf)
+    #except:
+    #    pass
     return kegman.conf

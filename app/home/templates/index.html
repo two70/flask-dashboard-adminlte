@@ -49,7 +49,7 @@
               <div class="card-header">
                 <h3 class="card-title">Kegman Values</h3>
               </div><!-- /.card-header -->
-              <form id="kegman_form" method="POST" action="">
+              <form id="kegman-form" method="POST" action="">
                 <div class="card-body">
                   <div class="row margin">
                     <div class="col-12">
@@ -75,7 +75,7 @@
                       </div><!-- /.slider-blue -->
                       <p>advanceSteer</p>
                       <div class="slider-blue">
-                        <input type="text" value="" class="submit-form slider form-control" 
+                        <input type="text" id="angleFactor" value="" class="submit-form slider form-control" 
                              data-slider-min="-1" data-slider-max="1"
                              data-slider-step="0.1" data-slider-value="0" data-slider-orientation="horizontal"
                              data-slider-selection="before" data-slider-tooltip="show">
@@ -119,12 +119,16 @@
   <script>
       $("document").ready(function(){
           //$('.submit-form').on('keyup', function(){
-          $("#kegman_form input").change(function(){
+          $("#kegman-form input").change(function(){
               $.ajax({
                   url: "/api/kegman",
                   type: "POST",
+                  dataType: "json",
                   contentType: "application/json",
-                  data: $('kegman_form').serialize
+                  //data: $('form').serialize()
+                  data: {
+                      angleFactor: $('#angleFactor').val(),
+                  },
               }).done(function(data) {
                   console.log(data);
               });
