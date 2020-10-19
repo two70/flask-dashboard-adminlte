@@ -40,22 +40,20 @@ def kegman_data():
     d = request.form.to_dict()
     json = request.get_json()
     print(json)
-    for k, v in json.items():
-        print(f"{k} = {v}")
-    #data = json.dumps(request.data.decode('utf-8'))
 
-    #try:
-    #    for item in kegman.conf:
-    #        if item in config and str(config[item]) != str(kegman.conf[item]) and float(config[item]) != float(kegman.conf[item]) and not item in ['identifier', 'time']:
-    #            print(item, config[item], kegman.conf[item])
-    #            kegman.conf[item] = str(config[item])
-    #            itemChanged = True
-    #        else:
-    #            config[item] = kegman.conf[item]
-    #    if itemChanged:
-    #        kegman.element_updated = True
-    #        kegman.write_config(kegman.conf)
-    #        #tunePush.send_json(kegman.conf)
-    #except:
-    #    pass
+    itemChanged = False
+    try:
+        for item in kegman.conf:
+            if item in json and str(json[item]) != str(kegman.conf[item]) and float(json[item]) != float(kegman.conf[item]) and not item in ['identifier', 'time']:
+                print(item, json[item], kegman.conf[item])
+                kegman.conf[item] = str(json[item])
+                itemChanged = True
+            else:
+                json[item] = kegman.conf[item]
+        if itemChanged:
+            kegman.element_updated = True
+            kegman.write_config(kegman.conf)
+            #tunePush.send_json(kegman.conf)
+    except:
+        pass
     return kegman.conf

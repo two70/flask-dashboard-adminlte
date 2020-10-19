@@ -82,11 +82,11 @@
                       </div><!-- /.slider-blue -->
                       <p>angleFactor</p>
                       <div class="form-group">
-                        <input class="form-control" type="text" value="{{ kegman['fingerprint'] }}" placeholder="{{ kegman['fingerprint'] }}">
+                        <input type="text" id="fingerprint" class="form-control" value="{{ kegman['fingerprint'] }}" placeholder="{{ kegman['fingerprint'] }}">
                       </div><!-- /.fingerprint -->
                       <p>fingerprint</p>
                       <div class="form-check">
-                        <input type="checkbox" class="submit-form form-check-input" 
+                        <input type="checkbox" id="useAutoFlash" class="submit-form form-check-input" 
                           id="useAutoFlash" {% if kegman['useAutoFlash'] == "1" %} checked {% endif %}>
                         <label class="form-check-label" for="useAutoFlash">useAutoFlash</label>
                       </div><!-- /.form-check -->
@@ -119,18 +119,39 @@
   <script>
       $("document").ready(function(){
           //$('.submit-form').on('keyup', function(){
-          $("#kegman-form input").change(function(){
-              d = {
-                  angleFactor: $('#angleFactor').val(),
-                  advanceSteer: $('#advanceSteer').val(),
-              };
-              console.log(d);
+          $("#kegman-form input").change(function(x){
+              console.log(x);
+              //console.log(x);
+              newData = {};
+
+              // is slider or textbox
+              if(x.target.type === "text") {
+                  
+                  if(typeof x.target.value === "string") { // is textbox
+                    newData[x.target.id] = x.target.value;
+                  } else { // is slider
+                    newData[x.target.id] = x.value['newValue'];
+                  }
+              } else { // is checkbox
+                  if(x.target.checked)
+                    newData[x.target.id] = "1";
+                  else
+                    newData[x.target.id] = "0";
+              }
+              console.log(newData);
+
+              //d = {
+              //    angleFactor: $('#angleFactor').val(),
+              //    advanceSteer: $('#advanceSteer').val(),
+              //    useAutoFlash: $('#useAutoFlash').val(),
+              //};
+              //console.log(d);
               $.ajax({
                   url: "/api/kegman",
                   type: "POST",
                   dataType: "json",
                   contentType: "application/json",
-                  data: JSON.stringify(d),
+                  data: JSON.stringify(newData),
               }).done(function(data) {
                   //console.log(data);
               });
