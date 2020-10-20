@@ -29,13 +29,6 @@
           <div class="col-sm-6">
             <h1>Tune</h1>
           </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item"><a href="#">Layout</a></li>
-              <li class="breadcrumb-item active">Tune</li>
-            </ol>
-          </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -54,16 +47,23 @@
                   <div class="row margin">
                     <div class="col-12">
                       <div class="slider-blue">
-                        <input type="text" value="" class="submit-form slider form-control" 
+                        <input type="text" id="Kp" value="" class="submit-form slider form-control" 
                              data-slider-min="0" data-slider-max="1"
-                             data-slider-step="0.1" data-slider-value="{{ kegman['Ki'] }}" data-slider-orientation="horizontal"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['Kp'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>Kp</p>
+                      <div class="slider-blue">
+                        <input type="text" id="Ki" value="" class="submit-form slider form-control" 
+                             data-slider-min="0" data-slider-max="1"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['Ki'] }}" data-slider-orientation="horizontal"
                              data-slider-selection="before" data-slider-tooltip="show">
                       </div><!-- /.slider-blue -->
                       <p>Ki</p>
                       <div class="slider-blue">
-                        <input type="text" value="" class="submit-form slider form-control" 
+                        <input type="text" id="accelLimit" value="" class="submit-form slider form-control" 
                              data-slider-min="-1" data-slider-max="1"
-                             data-slider-step="0.1" data-slider-value="{{ kegman['accelLimit'] }}" data-slider-orientation="horizontal"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['accelLimit'] }}" data-slider-orientation="horizontal"
                              data-slider-selection="before" data-slider-tooltip="show">
                       </div><!-- /.slider-blue -->
                       <p>accelLimit</p>
@@ -77,14 +77,85 @@
                       <div class="slider-blue">
                         <input type="text" id="angleFactor" value="" class="submit-form slider form-control" 
                              data-slider-min="-1" data-slider-max="1"
-                             data-slider-step="0.1" data-slider-value="0" data-slider-orientation="horizontal"
+                             data-slider-step="0.01" data-slider-value="0" data-slider-orientation="horizontal"
                              data-slider-selection="before" data-slider-tooltip="show">
                       </div><!-- /.slider-blue -->
                       <p>angleFactor</p>
-                      <div class="form-group">
-                        <input type="text" id="fingerprint" class="form-control" value="{{ kegman['fingerprint'] }}" placeholder="{{ kegman['fingerprint'] }}">
-                      </div><!-- /.fingerprint -->
-                      <p>fingerprint</p>
+                      <div class="slider-blue">
+                        <input type="text" id="dampMPC" value="" class="submit-form slider form-control" 
+                             data-slider-min="0" data-slider-max="0.2"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['dampMPC'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>dampMPC</p>
+                      <div class="slider-blue">
+                        <input type="text" id="dampSteer" value="" class="submit-form slider form-control" 
+                             data-slider-min="0" data-slider-max="1"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['dampSteer'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>dampSteer</p>
+                      <div class="slider-blue">
+                        <input type="text" id="deadzone" value="" class="submit-form slider form-control" 
+                             data-slider-min="-0.1" data-slider-max="0.1"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['deadzone'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>deadzone</p>
+                      <div class="slider-blue">
+                        <input type="text" id="discreteAngle" value="" class="submit-form slider form-control" 
+                             data-slider-min="0" data-slider-max="1"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['discreteAngle'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>discreteAngle</p>
+                      <!-- div class="form-group">
+                        <input type="text" id="fingerprint" class="form-control" value="{{ kegman['fingerprint'] }}" 
+                             placeholder="{{ kegman['fingerprint'] }}">
+                      </div>
+                      <p>fingerprint</p -->
+                      <div class="slider-blue">
+                        <input type="text" id="lateralFactor" value="" class="submit-form slider form-control" 
+                             data-slider-min="0" data-slider-max="1"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['lateralFactor'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>lateralFactor</p>
+                      <div class="slider-blue">
+                        <input type="text" id="polyDamp" value="" class="submit-form slider form-control" 
+                             data-slider-min="0" data-slider-max="1"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['polyDamp'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>polyDamp</p>
+                      <div class="slider-blue">
+                        <input type="text" id="polyFactor" value="" class="submit-form slider form-control" 
+                             data-slider-min="-0.1" data-slider-max="0.1"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['polyFactor'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>polyFactor</p>
+                      <div class="slider-blue">
+                        <input type="text" id="polyReact" value="" class="submit-form slider form-control" 
+                             data-slider-min="0" data-slider-max="1"
+                             data-slider-step="0.1" data-slider-value="{{ kegman['polyReact'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>polyReact</p>
+                      <div class="slider-blue">
+                        <input type="text" id="speedFactor" value="" class="submit-form slider form-control" 
+                             data-slider-min="-0.1" data-slider-max="0.1"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['speedFactor'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>speedFactor</p>
+                      <div class="slider-blue">
+                        <input type="text" id="steerFactor" value="" class="submit-form slider form-control" 
+                             data-slider-min="0" data-slider-max="1"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['steerFactor'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>steerFactor</p>
                       <div class="form-check">
                         <input type="checkbox" id="useAutoFlash" class="submit-form form-check-input" 
                           id="useAutoFlash" {% if kegman['useAutoFlash'] == "1" %} checked {% endif %}>
