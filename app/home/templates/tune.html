@@ -1,0 +1,237 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Tune {% endblock %} 
+
+<!-- Element injected in the BODY element -->
+{% block body_class %} sidebar-mini layout-boxed {% endblock body_class %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+  <!-- bootstrap slider -->
+  <link rel="stylesheet" href="/static/assets/plugins/bootstrap-slider/css/bootstrap-slider.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Tune</h1>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Kegman Values</h3>
+              </div><!-- /.card-header -->
+              <form id="kegman-form" method="POST" action="">
+                <div class="card-body">
+                  <div class="row margin">
+                    <div class="col-12">
+                      <div class="slider-blue">
+                        <input type="text" id="Kp" value="" class="submit-form slider form-control" 
+                             data-slider-min="0" data-slider-max="1"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['Kp'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>Kp</p>
+                      <div class="slider-blue">
+                        <input type="text" id="Ki" value="" class="submit-form slider form-control" 
+                             data-slider-min="0" data-slider-max="1"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['Ki'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>Ki</p>
+                      <div class="slider-blue">
+                        <input type="text" id="accelLimit" value="" class="submit-form slider form-control" 
+                             data-slider-min="-1" data-slider-max="1"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['accelLimit'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>accelLimit</p>
+                      <div class="slider-blue">
+                        <input type="text" id="advanceSteer" value="" class="submit-form slider form-control" 
+                             data-slider-min="-1" data-slider-max="1"
+                             data-slider-step="0.1" data-slider-value="{{ kegman['advanceSteer'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>advanceSteer</p>
+                      <div class="slider-blue">
+                        <input type="text" id="angleFactor" value="" class="submit-form slider form-control" 
+                             data-slider-min="-1" data-slider-max="1"
+                             data-slider-step="0.01" data-slider-value="0" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>angleFactor</p>
+                      <div class="slider-blue">
+                        <input type="text" id="dampMPC" value="" class="submit-form slider form-control" 
+                             data-slider-min="0" data-slider-max="0.2"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['dampMPC'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>dampMPC</p>
+                      <div class="slider-blue">
+                        <input type="text" id="dampSteer" value="" class="submit-form slider form-control" 
+                             data-slider-min="0" data-slider-max="1"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['dampSteer'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>dampSteer</p>
+                      <div class="slider-blue">
+                        <input type="text" id="deadzone" value="" class="submit-form slider form-control" 
+                             data-slider-min="-0.1" data-slider-max="0.1"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['deadzone'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>deadzone</p>
+                      <div class="slider-blue">
+                        <input type="text" id="discreteAngle" value="" class="submit-form slider form-control" 
+                             data-slider-min="0" data-slider-max="1"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['discreteAngle'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>discreteAngle</p>
+                      <!-- div class="form-group">
+                        <input type="text" id="fingerprint" class="form-control" value="{{ kegman['fingerprint'] }}" 
+                             placeholder="{{ kegman['fingerprint'] }}">
+                      </div>
+                      <p>fingerprint</p -->
+                      <div class="slider-blue">
+                        <input type="text" id="lateralFactor" value="" class="submit-form slider form-control" 
+                             data-slider-min="0" data-slider-max="1"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['lateralFactor'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>lateralFactor</p>
+                      <div class="slider-blue">
+                        <input type="text" id="polyDamp" value="" class="submit-form slider form-control" 
+                             data-slider-min="0" data-slider-max="1"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['polyDamp'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>polyDamp</p>
+                      <div class="slider-blue">
+                        <input type="text" id="polyFactor" value="" class="submit-form slider form-control" 
+                             data-slider-min="-0.1" data-slider-max="0.1"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['polyFactor'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>polyFactor</p>
+                      <div class="slider-blue">
+                        <input type="text" id="polyReact" value="" class="submit-form slider form-control" 
+                             data-slider-min="0" data-slider-max="1"
+                             data-slider-step="0.1" data-slider-value="{{ kegman['polyReact'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>polyReact</p>
+                      <div class="slider-blue">
+                        <input type="text" id="speedFactor" value="" class="submit-form slider form-control" 
+                             data-slider-min="-0.1" data-slider-max="0.1"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['speedFactor'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>speedFactor</p>
+                      <div class="slider-blue">
+                        <input type="text" id="steerFactor" value="" class="submit-form slider form-control" 
+                             data-slider-min="0" data-slider-max="1"
+                             data-slider-step="0.01" data-slider-value="{{ kegman['steerFactor'] }}" data-slider-orientation="horizontal"
+                             data-slider-selection="before" data-slider-tooltip="show">
+                      </div><!-- /.slider-blue -->
+                      <p>steerFactor</p>
+                      <div class="form-check">
+                        <input type="checkbox" id="useAutoFlash" class="submit-form form-check-input" 
+                          id="useAutoFlash" {% if kegman['useAutoFlash'] == "1" %} checked {% endif %}>
+                        <label class="form-check-label" for="useAutoFlash">useAutoFlash</label>
+                      </div><!-- /.form-check -->
+                    </div><!-- /.col-12 -->
+                  </div><!-- /.row -->
+                </div><!-- /.card-body -->
+              </form>
+            </div><!-- /.card -->
+          </div><!-- /.col-12 -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section><!-- /.content -->
+  </div><!-- /.content-wrapper -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+  <!-- jQuery -->
+  <script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="/static/assets/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="/static/assets/js/demo.js"></script>
+  <!-- Bootstrap slider -->
+  <script src="/static/assets/plugins/bootstrap-slider/bootstrap-slider.min.js"></script>
+  <script>
+      $("document").ready(function(){
+          //$('.submit-form').on('keyup', function(){
+          $("#kegman-form input").change(function(x){
+              console.log(x);
+              //console.log(x);
+              newData = {};
+
+              // is slider or textbox
+              if(x.target.type === "text") {
+                  
+                  if(typeof x.target.value === "string") { // is textbox
+                    newData[x.target.id] = x.target.value;
+                  } else { // is slider
+                    newData[x.target.id] = x.value['newValue'];
+                  }
+              } else { // is checkbox
+                  if(x.target.checked)
+                    newData[x.target.id] = "1";
+                  else
+                    newData[x.target.id] = "0";
+              }
+              console.log(newData);
+
+              //d = {
+              //    angleFactor: $('#angleFactor').val(),
+              //    advanceSteer: $('#advanceSteer').val(),
+              //    useAutoFlash: $('#useAutoFlash').val(),
+              //};
+              //console.log(d);
+              $.ajax({
+                  url: "/api/kegman",
+                  type: "POST",
+                  dataType: "json",
+                  contentType: "application/json",
+                  data: JSON.stringify(newData),
+              }).done(function(data) {
+                  //console.log(data);
+              });
+          });
+      });
+      $(function () {
+          /* BOOTSTRAP SLIDER */
+          $('.slider').bootstrapSlider()
+      });
+  </script>
+
+{% endblock javascripts %}

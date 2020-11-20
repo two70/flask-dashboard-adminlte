@@ -23,8 +23,8 @@ def route_template(template):
         if not template.endswith( '.html' ):
             template += '.html'
 
-        #if template == "index.html":
-        #    return render_template( template, kegman=kegman.conf )
+        if template == "tune.html":
+            return render_template( template, kegman=kegman.conf )
 
         return render_template( template )
 
